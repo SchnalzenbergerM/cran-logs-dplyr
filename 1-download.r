@@ -1,4 +1,5 @@
 library(plyr)
+library(dplyr)
 
 # Make sure we have all the logs -----------------------------------------------
 message("Downloading logs")
@@ -28,7 +29,7 @@ all_pkgs <- llply(logs, function(file){
   data
 }, .progress = "text")
 
-all <- rbind_all(all_pkgs)
+all <- bind_rows(all_pkgs)
 class(all) <- c("tbl_df", "tbl", "data.frame")
 
 saveRDS(all, file = "logs.rds")
